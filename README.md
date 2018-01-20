@@ -1,9 +1,20 @@
 # what3words-tools
 
+This is an unofficial set of tools around what3words API.
+
+
+## usage
+
+### CLI
+
+### API
+
 
 ## Build and test
 
 ### setup
+
+clone the repository
 
     $ npm i
 
