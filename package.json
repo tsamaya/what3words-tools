@@ -4,12 +4,7 @@
   "description": "",
   "main": "index.js",
   "lint-staged": {
-    "lib/**/*.{js,json}": [
-      "eslint --fix",
-      "prettier --config .prettierrc --write",
-      "git add"
-    ],
-    "index.js": [
+    "**/*.{js,json}": [
       "eslint --fix",
       "prettier --config .prettierrc --write",
       "git add"
