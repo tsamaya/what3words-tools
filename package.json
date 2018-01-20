@@ -1,0 +1,51 @@
+{
+  "name": "what3words-tools",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "lint-staged": {
+    "lib/**/*.{js,json}": [
+      "eslint --fix",
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "index.js": [
+      "eslint --fix",
+      "prettier --config .prettierrc --write",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "lint": "eslint --ext=js .",
+    "codecov": "codecov",
+    "coverage": "npm run test && npm run codecov",
+    "pretest": "npm run lint",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tsamaya/what3words-tools.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tsamaya/what3words-tools/issues"
+  },
+  "homepage": "https://github.com/tsamaya/what3words-tools#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "what3words-api-nodejs-client": "^0.1.1"
+  },
+  "devDependencies": {
+    "codecov": "^3.0.0",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.7.0",
+    "jest": "^22.1.4",
+    "lint-staged": "^6.0.1",
+    "prettier": "^1.10.2"
+  }
+}
