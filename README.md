@@ -1,15 +1,28 @@
 # what3words-tools
 
+[![Build Status](https://travis-ci.org/tsamaya/what3words-tools.svg?branch=develop)](https://travis-ci.org/tsamaya/what3words-tools)
+
 This is an unofficial set of tools around what3words API.
 
 ## usage
 
-    $ npm install -g what3words-tools
+### Recommended
+set up environment :
 
-
-recommended, set up environment :
     $ export W3W_API_KEY=<YOUR-W3W-API-KEY>
     $ export GOOGLE_API_KEY=<YOUR-GOOGLE-API-KEY>
+
+install globally:
+
+    $ npm install -g what3words-tools
+
+### alternative
+
+    $ npm install what3words-tools
+
+    then access to cli adding `./node_modules/.bin/`
+
+    and API key can be adding a API level or as input parameters for cli
 
 ### CLI
 
