@@ -26,19 +26,20 @@ install globally:
 
 ### CLI
 
-    $ w3w-cli --geocode --languages
-    $ w3w-cli --geocode --languages --w3w_key <YOUR-W3W-API-KEY>
+    $ w3w-cli languages
+    $ w3w-cli languages --w3w-key <YOUR-W3W-API-KEY>
 
-    $ w3w-cli --geocode --addr index.home.raft
-    $ w3w-cli --geocode --coords 51.521251,-0.203586
-    $ w3w-cli --geocode --lat 51.521251 --lng -0.203586
+    $ w3w-cli geocode --addr index.home.raft
+    $ w3w-cli geocode --coords 51.521251,-0.203586
 
-    $ w3w-cli --whereis --addr index.home.raft
-    $ w3w-cli --whereis --addr index.home.raft --w3w_key <YOUR-W3W-API-KEY> --google_key <YOUR-GOOGLE-API-KEY>
+    $ w3w-cli whereis --addr index.home.raft
+    $ w3w-cli whereis --addr index.home.raft --w3w-key <YOUR-W3W-API-KEY> --google-key <YOUR-GOOGLE-API-KEY>
 
 ### API
 
+> TODO
 
+see examples in [samples](./samples) folder
 
 ## Build and test
 

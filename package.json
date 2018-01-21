@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
+  "bin": "./bin/w3w-cli",
   "lint-staged": {
     "*.js": [
       "eslint --fix",
@@ -22,7 +23,7 @@
     "url": "git+https://github.com/tsamaya/what3words-tools.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Arnaud Ferrand",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tsamaya/what3words-tools/issues"
@@ -31,7 +32,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "dotenv": "^4.0.0",
-    "what3words-api-nodejs-client": "^0.1.1"
+    "what3words-api-nodejs-client": "^0.1.1",
+    "yargs": "^10.1.1"
   },
   "devDependencies": {
     "codecov": "^3.0.0",
