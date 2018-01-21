@@ -15,7 +15,7 @@
     "codecov": "codecov",
     "coverage": "npm run test && npm run codecov",
     "pretest": "npm run lint",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
