@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/tsamaya/what3words-tools#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "dotenv": "^4.0.0",
     "what3words-api-nodejs-client": "^0.1.1"
   },
