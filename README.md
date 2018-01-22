@@ -1,8 +1,9 @@
 # what3words-tools
 
+This is an unofficial set of tools around what3words API.
+
 [![Build Status](https://travis-ci.org/tsamaya/what3words-tools.svg?branch=develop)](https://travis-ci.org/tsamaya/what3words-tools)
 
-This is an unofficial set of tools around what3words API.
 
 ## usage
 
@@ -26,14 +27,14 @@ install globally:
 
 ### CLI
 
-    $ w3w-cli languages
-    $ w3w-cli languages --w3w-key <YOUR-W3W-API-KEY>
+    $ what3words-tools languages
+    $ what3words-tools languages --w3w-key <YOUR-W3W-API-KEY>
 
-    $ w3w-cli geocode --addr index.home.raft
+    $ what3words-tools geocode --addr index.home.raft
     $ w3w-cli geocode --coords 51.521251,-0.203586
 
-    $ w3w-cli whereis --addr index.home.raft
-    $ w3w-cli whereis --addr index.home.raft --w3w-key <YOUR-W3W-API-KEY> --google-key <YOUR-GOOGLE-API-KEY>
+    $ what3words-tools whereis --addr index.home.raft
+    $ what3words-tools whereis --addr index.home.raft --w3w-key <YOUR-W3W-API-KEY> --google-key <YOUR-GOOGLE-API-KEY>
 
 ### API
 
@@ -49,7 +50,7 @@ clone the repository
 
     $ npm i
 
-### unit test
+### unit tests
 
     $ npm test
 
