@@ -8,12 +8,15 @@ This is an unofficial set of tools around what3words API.
 ## usage
 
 ### Recommended
-set up environment :
+Set up environment :
 
     $ export W3W_API_KEY=<YOUR-W3W-API-KEY>
+
+and for the `whereis` operation:
+
     $ export GOOGLE_API_KEY=<YOUR-GOOGLE-API-KEY>
 
-install globally:
+Install globally:
 
     $ npm install -g what3words-tools
 
@@ -21,9 +24,9 @@ install globally:
 
     $ npm install what3words-tools
 
-    then access to cli adding `./node_modules/.bin/`
+then access to cli adding `./node_modules/.bin/`
 
-    and API key can be adding a API level or as input parameters for cli
+and API key can be added at the API level or as input parameters for CLI
 
 ### CLI
 
@@ -31,7 +34,7 @@ install globally:
     $ what3words-tools languages --w3w-key <YOUR-W3W-API-KEY>
 
     $ what3words-tools geocode --addr index.home.raft
-    $ w3w-cli geocode --coords 51.521251,-0.203586
+    $ what3words-tools geocode --coords 51.521251,-0.203586
 
     $ what3words-tools whereis --addr index.home.raft
     $ what3words-tools whereis --addr index.home.raft --w3w-key <YOUR-W3W-API-KEY> --google-key <YOUR-GOOGLE-API-KEY>
