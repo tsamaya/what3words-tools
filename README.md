@@ -24,7 +24,7 @@ Install globally:
 
     $ npm install what3words-tools
 
-then access to cli adding `./node_modules/.bin/`
+then access the CLI by adding the path : `./node_modules/.bin/`
 
 and API key can be added at the API level or as input parameters for CLI
 
