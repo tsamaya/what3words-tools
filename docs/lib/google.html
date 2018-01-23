@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>google.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="../index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="cli.html">
+                  lib/cli.js
+                </a>
+              
+                
+                <a class="source" href="errors.html">
+                  lib/errors.js
+                </a>
+              
+                
+                <a class="source" href="geocode.html">
+                  lib/geocode.js
+                </a>
+              
+                
+                <a class="source" href="google.html">
+                  lib/google.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  lib/index.js
+                </a>
+              
+                
+                <a class="source" href="languages.html">
+                  lib/languages.js
+                </a>
+              
+                
+                <a class="source" href="nearby.html">
+                  lib/nearby.js
+                </a>
+              
+                
+                <a class="source" href="util.html">
+                  lib/util.js
+                </a>
+              
+                
+                <a class="source" href="whereis.html">
+                  lib/whereis.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>google.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">const</span> axios = <span class="hljs-built_in">require</span>(<span class="hljs-string">'axios'</span>);
+<span class="hljs-keyword">const</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./util'</span>);
+<span class="hljs-keyword">const</span> messages = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./errors'</span>);
+
+<span class="hljs-keyword">const</span> GOOGLE_GEOCODE_URL = <span class="hljs-string">'https://maps.googleapis.com/maps/api/geocode/json'</span>;
+
+<span class="hljs-keyword">const</span> geocodeGoogle = <span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span>
+  axios.get(GOOGLE_GEOCODE_URL, {
+    params,
+  });
+<span class="hljs-comment">/**
+ * parse Google Address Components using only
+ * sublocality_level_1, postal_town, administrative_area_level_1 and country
+ *
+ * @param  {Object} addressComponents [description]
+ * @return {String}                   [description]
+ */</span>
+<span class="hljs-keyword">const</span> parseGoogleAddressComponents = <span class="hljs-function">(<span class="hljs-params">addressComponents</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> location = messages.UNKNOWN_LOCATION;
+  <span class="hljs-keyword">if</span> (util.isArray(addressComponents)) {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>empty location for concatenate components</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    location = <span class="hljs-string">''</span>;
+    addressComponents.forEach(<span class="hljs-function">(<span class="hljs-params">component</span>) =&gt;</span> {
+      <span class="hljs-keyword">const</span> addressTypes = component.types;
+      addressTypes.forEach(<span class="hljs-function">(<span class="hljs-params">type</span>) =&gt;</span> {
+        <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'sublocality_level_1'</span>) {
+          location += <span class="hljs-string">`<span class="hljs-subst">${component.long_name}</span>, `</span>;
+        }
+        <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'postal_town'</span>) {
+          location += <span class="hljs-string">`<span class="hljs-subst">${component.long_name}</span>, `</span>;
+        }
+        <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'administrative_area_level_1'</span>) {
+          location += <span class="hljs-string">`<span class="hljs-subst">${component.long_name}</span>, `</span>;
+        }
+        <span class="hljs-keyword">if</span> (type === <span class="hljs-string">'country'</span>) {
+          location += component.long_name;
+        }
+      });
+    });</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>is it still empty ?</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (location === <span class="hljs-string">''</span>) {
+      location = messages.UNKNOWN_LOCATION;
+    }
+  }
+  <span class="hljs-keyword">return</span> location;
+};
+
+<span class="hljs-keyword">const</span> googleReverseGeocode = <span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span>
+  <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+    <span class="hljs-keyword">const</span> lat = params.lat; <span class="hljs-comment">// eslint-disable-line</span>
+
+    <span class="hljs-keyword">const</span> lng = params.lng; <span class="hljs-comment">// eslint-disable-line</span>
+
+    <span class="hljs-keyword">const</span> key = params.key; <span class="hljs-comment">// eslint-disable-line</span>
+
+    <span class="hljs-keyword">if</span> (!util.isNumber(lat) || !util.isNumber(lng)) {
+      reject(messages.INVALID_COORDS_PARAMETERS);
+      <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">const</span> input = {};
+    input.latlng = <span class="hljs-string">`<span class="hljs-subst">${lat}</span>,<span class="hljs-subst">${lng}</span>`</span>;
+    input.key = key;
+    geocodeGoogle(input)
+      .then(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> {
+        <span class="hljs-keyword">const</span> result = {
+          <span class="hljs-attr">location</span>: messages.UNKNOWN_LOCATION,
+        };</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>console.log(‘200 response’);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        <span class="hljs-keyword">if</span> (
+          response.data &amp;&amp;
+          response.data.results &amp;&amp;
+          response.data.results[<span class="hljs-number">0</span>]
+        ) {
+          <span class="hljs-keyword">const</span> first = response.data.results[<span class="hljs-number">0</span>];
+          result.location = parseGoogleAddressComponents(first.address_components);
+          <span class="hljs-keyword">if</span> (first.formatted_address) {
+            result.formatted_address = first.formatted_address;
+          }
+        }
+        resolve(result);
+      })
+      .catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>console.log(‘googleReverseGeocode err response’, err);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>        reject(err.response.data);
+      });
+  });
+
+<span class="hljs-built_in">module</span>.exports = googleReverseGeocode;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

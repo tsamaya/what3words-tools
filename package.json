@@ -31,6 +31,7 @@
   "homepage": "https://github.com/tsamaya/what3words-tools#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "docco": "^0.8.0",
     "dotenv": "^4.0.0",
     "what3words-api-nodejs-client": "^0.2.0",
     "yargs": "^10.1.1"

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>nearby.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="../docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page_wrapper">
+            <div id="jump_page">
+              
+                
+                <a class="source" href="../index.html">
+                  index.js
+                </a>
+              
+                
+                <a class="source" href="cli.html">
+                  lib/cli.js
+                </a>
+              
+                
+                <a class="source" href="errors.html">
+                  lib/errors.js
+                </a>
+              
+                
+                <a class="source" href="geocode.html">
+                  lib/geocode.js
+                </a>
+              
+                
+                <a class="source" href="google.html">
+                  lib/google.js
+                </a>
+              
+                
+                <a class="source" href="index.html">
+                  lib/index.js
+                </a>
+              
+                
+                <a class="source" href="languages.html">
+                  lib/languages.js
+                </a>
+              
+                
+                <a class="source" href="nearby.html">
+                  lib/nearby.js
+                </a>
+              
+                
+                <a class="source" href="util.html">
+                  lib/util.js
+                </a>
+              
+                
+                <a class="source" href="whereis.html">
+                  lib/whereis.js
+                </a>
+              
+            </div>
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>nearby.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-comment">/* eslint no-console: "off" */</span>
+<span class="hljs-keyword">const</span> geocode = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./geocode'</span>);
+
+<span class="hljs-keyword">const</span> DELTA = <span class="hljs-number">0.000001</span>;
+
+<span class="hljs-keyword">const</span> around = <span class="hljs-function">(<span class="hljs-params">square, params</span>) =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> center = {
+    <span class="hljs-attr">lat</span>: square.geometry.coordinates[<span class="hljs-number">1</span>],
+    <span class="hljs-attr">lng</span>: square.geometry.coordinates[<span class="hljs-number">0</span>],
+  };
+  <span class="hljs-keyword">const</span> northeastBound = {
+    <span class="hljs-attr">lat</span>: square.bbox[<span class="hljs-number">3</span>],
+    <span class="hljs-attr">lng</span>: square.bbox[<span class="hljs-number">2</span>],
+  };
+  <span class="hljs-keyword">const</span> southwestBound = {
+    <span class="hljs-attr">lat</span>: square.bbox[<span class="hljs-number">1</span>],
+    <span class="hljs-attr">lng</span>: square.bbox[<span class="hljs-number">0</span>],
+  };
+
+  <span class="hljs-keyword">const</span> north = {
+    <span class="hljs-attr">lat</span>: northeastBound.lat + DELTA,
+    <span class="hljs-attr">lng</span>: center.lng,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'north'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> northeast = {
+    <span class="hljs-attr">lat</span>: northeastBound.lat + DELTA,
+    <span class="hljs-attr">lng</span>: northeastBound.lng + DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'northeast'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> east = {
+    <span class="hljs-attr">lat</span>: center.lat,
+    <span class="hljs-attr">lng</span>: northeastBound.lng + DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'east'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> southeast = {
+    <span class="hljs-attr">lat</span>: southwestBound.lat - DELTA,
+    <span class="hljs-attr">lng</span>: northeastBound.lng + DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'southeast'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> south = {
+    <span class="hljs-attr">lat</span>: southwestBound.lat - DELTA,
+    <span class="hljs-attr">lng</span>: center.lng,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'south'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> southwest = {
+    <span class="hljs-attr">lat</span>: southwestBound.lat - DELTA,
+    <span class="hljs-attr">lng</span>: southwestBound.lng - DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'southwest'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> west = {
+    <span class="hljs-attr">lat</span>: center.lat,
+    <span class="hljs-attr">lng</span>: southwestBound.lng - DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'west'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> northwest = {
+    <span class="hljs-attr">lat</span>: northeastBound.lat + DELTA,
+    <span class="hljs-attr">lng</span>: southwestBound.lng - DELTA,
+    <span class="hljs-attr">name</span>: <span class="hljs-string">'northwest'</span>,
+    <span class="hljs-attr">lang</span>: params.lang,
+    <span class="hljs-attr">key</span>: params.key,
+  };
+  <span class="hljs-keyword">const</span> all = [north, northeast, east, southeast, south, southwest, west, northwest];
+  <span class="hljs-keyword">const</span> p = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; all.length; i += <span class="hljs-number">1</span>) {
+    p.push(geocode(all[i]));
+  }
+  <span class="hljs-keyword">const</span> result = {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">'FeatureCollection'</span>,
+    <span class="hljs-attr">features</span>: [],
+  };
+  result.features.push(square);
+  <span class="hljs-built_in">Promise</span>.all(p).then(<span class="hljs-function">(<span class="hljs-params">values</span>) =&gt;</span> {
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; values.length; i += <span class="hljs-number">1</span>) {
+      result.features.push(values[i]);
+    }
+    resolve(result);
+  }).catch(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> reject(err));
+});
+
+<span class="hljs-keyword">const</span> nearby = <span class="hljs-function"><span class="hljs-params">params</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+  geocode(params).then(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> {
+    around(data, params).then(<span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> {
+      resolve(response);
+    }).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+      reject(err);
+    });
+  }).catch(<span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+    reject(err);
+  });
+});
+<span class="hljs-built_in">module</span>.exports = nearby;</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>
