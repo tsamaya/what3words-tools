@@ -32,7 +32,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "dotenv": "^4.0.0",
-    "what3words-api-nodejs-client": "^0.1.1",
+    "what3words-api-nodejs-client": "^0.2.0",
     "yargs": "^10.1.1"
   },
   "devDependencies": {
