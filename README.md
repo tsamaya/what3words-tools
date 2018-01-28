@@ -3,6 +3,7 @@
 This is an unofficial set of tools around what3words API.
 
 [![Build Status](https://travis-ci.org/tsamaya/what3words-tools.svg?branch=develop)](https://travis-ci.org/tsamaya/what3words-tools)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 
 ## usage
