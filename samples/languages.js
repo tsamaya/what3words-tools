@@ -2,8 +2,11 @@
 
 const tools = require('../');
 
-tools.languages().then((data) => {
-  console.log(data);
-}).catch((err) => {
-  console.log(err);
-});
+tools
+  .languages()
+  .then(data => {
+    console.log(data);
+  })
+  .catch(err => {
+    console.log(err);
+  });
